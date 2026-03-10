@@ -1,0 +1,16 @@
+name: Download Docker Image
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull and Save Image
+        run: |
+          docker pull alpine/openclaw:2024.12.1
+          docker save alpine/openclaw:2024.12.1 > openclaw-2024.tar
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openclaw-tar-file
+          path: openclaw-2024.tar
+          retention-days: 1
