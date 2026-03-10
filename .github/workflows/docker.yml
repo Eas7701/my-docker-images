@@ -1,18 +1,16 @@
-name: 下载 Docker 镜像
+name: download-docker-image
 on: [workflow_dispatch]
-permissions:
-  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 登录 Docker Hub (可选，但增加稳定性)
-        run: docker pull alpine/openclaw:2024.12.1
-      - name: 打包镜像
-        run: docker save alpine/openclaw:2024.12.1 > openclaw.tar
-      - name: 上传结果
+      - name: pull
+        run: docker pull alpine/openclaw:latest
+      - name: save
+        run: docker save alpine/openclaw:latest > openclaw.tar
+      - name: upload
         uses: actions/upload-artifact@v4
         with:
-          name: openclaw-2024-package
+          name: openclaw-package
           path: openclaw.tar
           retention-days: 1
