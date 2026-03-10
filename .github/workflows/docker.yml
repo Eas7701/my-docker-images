@@ -5,12 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: pull
-        run: docker pull alpine/openclaw:latest
+        run: docker pull alpine/openclaw:2024.12.1
       - name: save
-        run: docker save alpine/openclaw:latest > openclaw.tar
+        run: docker save alpine/openclaw:2024.12.1 > openclaw.tar
       - name: upload
         uses: actions/upload-artifact@v4
         with:
-          name: openclaw-package
+          name: openclaw-2024-package
           path: openclaw.tar
           retention-days: 1
